@@ -3,7 +3,7 @@
  */
 
 .flag {
-    position: absolute;
+    position: initial;!important;
     display: inline-block;
     width: 16px;
     height: 11px;

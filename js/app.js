@@ -16,9 +16,9 @@ var links = response.links.map(function(item){
     item.source = countries[item.source];
     return item;
 });
-var flags = response.nodes.map(function(item){
-return 'flag-'+item.code;
-});
+
+var flags = response.nodes;
+
 var nodes = {};
 
 // Compute the distinct nodes from the links.
@@ -56,16 +56,32 @@ var node = svg.selectAll(".node")
     .on("mouseout", mouseout)
     .call(force.drag);
 
-node.append("circle")
-    .attr("r", 8);
-var flags = d3.select(".flags").selectAll(".node")
-    .data(force.nodes())
-    .enter().append("image")
-    //.attr('dx',-9)
-    .attr("dy", ".35em")
-    .attr("xlink:href","../img/blank.gif")
-    .attr('class', 'flag flag-ao')
-    .call(force.drag);
+node.append("foreignObject")
+    .attr("class","flags")
+    .attr("width",17)
+    .attr("height",12)
+    .attr("x",-8)
+    .attr("y",-5.5)
+    .append("xhtml:div")
+    .attr("class", function(d) {
+        var code ='';
+        flags.forEach(function(item){
+            if (item.country == d.name){
+                code = item.code
+            }
+        });
+        return "flag flag-" + code;
+    });
+
+svg.append("foreignObject")
+    .attr("id","tooltip")
+    .attr("width",80)
+    .attr("height",100)
+    .attr("x",-10)
+    .attr("y",-10)
+    .append("xhtml:div")
+    .attr("id","textbox")
+    .html("");
 
 node.append("text")
     .attr("x", 12)
