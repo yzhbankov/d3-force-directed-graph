@@ -1,5 +1,5 @@
 /**
- * Created by ְֳִּ 3 on 31.01.2017.
+ * Created by yzhbankov on 31.01.2017.
  */
 
 var xhr = new XMLHttpRequest();
