@@ -27,8 +27,8 @@ links.forEach(function(link) {
     link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
 });
 
-var width = 1460,
-    height = 900;
+var width = 1060,
+    height = 700;
 
 var force = d3.layout.force()
     .nodes(d3.values(nodes))
@@ -87,6 +87,8 @@ node.append("text")
     .attr("x", 12)
     .attr("dy", ".35em")
     .text(function(d) { return d.name; });
+
+
 
 function tick() {
     link
